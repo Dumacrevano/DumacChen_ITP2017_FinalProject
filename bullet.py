@@ -13,7 +13,7 @@ class Bullet(Sprite):
         self.speedx = 20
 
         self.image = pygame.image.load("bullets.png")
-        self.image = pygame.transform.scale(self.image,(50,50))
+        self.image = pygame.transform.scale(self.image,(40,40))
         self.rect=self.image.get_rect()
         self.rect.left = startx
         self.rect.top = starty

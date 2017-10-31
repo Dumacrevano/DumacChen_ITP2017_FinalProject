@@ -21,6 +21,9 @@ class Button(Sprite):
 
 
 def run_game():
+    screen = pygame.display.set_mode((800, 600))
+    display.set_caption("Jet mission")
+
     """function to move the background image"""
     scores = 0
     theClock = pygame.time.Clock()
@@ -33,8 +36,7 @@ def run_game():
     y1 = 0
 
     pygame.init()
-    screen = pygame.display.set_mode((800, 600))
-    display.set_caption("Jet mission")
+
 
     #creating a jet
     jet1 = Jet(screen)
@@ -51,9 +53,11 @@ def run_game():
     time = 40
     asteroid_timer = pygame.time.get_ticks()
     while True:
-        time += 0.005
-        """background move"""
         theClock.tick(time)
+        time += 0.005#game phase goes faster after every frame
+
+        """background move"""
+
         x -= 5
         x1 -= 5
         screen.blit(background, (x, y))
@@ -94,7 +98,7 @@ def run_game():
         if key[K_UP] and jet1.rect.y>0:
             jet1.moveup()
 
-        if key[K_SPACE] and len(bullets) <= jet1.firerates+(scores/20000):
+        if key[K_SPACE] and len(bullets) <= jet1.firerates+(scores/4000):
             bullet = Bullet(screen, jet1.rect.x+50, jet1.rect.y+42)
             bullets.add(bullet)
 
@@ -107,7 +111,7 @@ def run_game():
 
         """generate asteroid randomly"""
         if pygame.time.get_ticks() - asteroid_timer >= 200:
-            asteroid = Asteroid(screen, 50, 50, 10, 1000, (random.randint(1,18) * 30))
+            asteroid = Asteroid(screen, 50, 50, random.randint(1,4)*6, 800, (random.randint(1,28) * 20))
             asteroid_group.add(asteroid)
             asteroid_timer = pygame.time.get_ticks()
 
@@ -116,7 +120,8 @@ def run_game():
             asteroid.movement()
             if asteroid.rect.right <= 0:
                 asteroid_group.remove(asteroid)
-            groupcollide(all_sprites,asteroid_group,dokilla=True,dokillb=True)
+            if groupcollide(all_sprites,asteroid_group,dokilla=True,dokillb=True):
+                menu.lose_menu(Button,run_game,scores)
 
         """update bullet movement on screen"""
         for bullet in bullets:
