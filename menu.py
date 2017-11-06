@@ -53,7 +53,7 @@ def pause_menu(Button,run_game):
 
 
     pygame.init()
-    paused=True #flag
+    paused=True #pause flag
     while paused:
         rect_start = draw.rect(screen, (0, 0, 0), (250, 200, 300, 150))
         rect_return = draw.rect(screen, (0, 0, 0), (250, 300, 300, 150))
@@ -83,9 +83,11 @@ def lose_menu(Button,run_game,score):
     font=pygame.font.SysFont("times new roman",100)
     text=font.render("Replay?",True,(255,255,255))
     score_text=font.render("score:"+str(score),True,(255,255,255))
+
     # object button for quit and start
     start_button = Button("New Piskel.png")
     quit_button = Button("quit button.png")
+
     # image for the menu's backgound
     bg_image = pygame.image.load("asteroid_wall.jpg")
     bg_image = pygame.transform.scale(bg_image, (800, 600))

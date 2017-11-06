@@ -1,37 +1,25 @@
 from pygame import *
-
-from pygame.sprite import *
-from jet import Jet
-
 import menu
-from back_ground import Star
-
-from asteroid_class import *
-
-from bullet import Bullet
 import random
 
+from classes import *
 
-class Button(Sprite):
-    """initialize the button"""
-    def __init__(self,image):
-        Sprite. __init__(self)
-        self.button=pygame.image.load(image)
-        self.button=pygame.transform.scale(self.button,(300,150))
+
 
 
 def run_game():
+    """game play interface"""
     screen = pygame.display.set_mode((800, 600))
     display.set_caption("Jet mission")
 
-    """function to move the background image"""
+
     scores = 0
     theClock = pygame.time.Clock()
-    bg_image = Star()
-    background = bg_image.background
+    bg_image = Star_bg("star.gif")
+
+    #coordinate of moving background
     x = 0
     y = 0
-
     x1 = bg_image.width
     y1 = 0
 
@@ -40,28 +28,28 @@ def run_game():
 
     #creating a jet
     jet1 = Jet(screen)
-    all_sprites = Group(jet1)
+    Jet_sprites = Group(jet1)
 
     #create asteroid object group
-    asteroid_group=Group()
+    asteroid_group = Group()
 
     #create bullets object Group
-    bullets=Group()
+    bullets = Group()
 
 
 
-    time = 40
+    Fps = 40
     asteroid_timer = pygame.time.get_ticks()
     while True:
-        theClock.tick(time)
-        time += 0.005#game phase goes faster after every frame
+        theClock.tick(Fps)
+        Fps += 0.01#game phase goes faster after every frame
 
         """background move"""
 
         x -= 5
         x1 -= 5
-        screen.blit(background, (x, y))
-        screen.blit(background, (x1, y1))
+        bg_image.draw(screen,x,y)
+        bg_image.draw(screen,x1, y1)
         if x < -bg_image.width:
             x = 0
         if x1 < 0:
@@ -75,7 +63,7 @@ def run_game():
 
 
 
-        all_sprites.draw(screen)
+        Jet_sprites.draw(screen)
 
         bullets.draw(screen)
 
@@ -101,6 +89,8 @@ def run_game():
         if key[K_SPACE] and len(bullets) <= jet1.firerates+(scores/4000):
             bullet = Bullet(screen, jet1.rect.x+50, jet1.rect.y+42)
             bullets.add(bullet)
+            pygame.mixer.music.load("LaserBlast.wav")
+            pygame.mixer.music.play()
 
         if key[K_ESCAPE]:
             menu.menu_screen(Button,run_game)
@@ -119,17 +109,21 @@ def run_game():
         for asteroid in asteroid_group:
             asteroid.movement()
             if asteroid.rect.right <= 0:
-                asteroid_group.remove(asteroid)
-            if groupcollide(all_sprites,asteroid_group,dokilla=True,dokillb=True):
+                asteroid_group.remove(asteroid) #remove after screen
+            if groupcollide(Jet_sprites,asteroid_group,dokilla=True,dokillb=True):#collition check
                 menu.lose_menu(Button,run_game,scores)
 
         """update bullet movement on screen"""
         for bullet in bullets:
             bullet.movement()
-            if bullet.rect.left>800:
+            if bullet.rect.left > 800:
                 bullets.remove(bullet)
             if groupcollide(bullets,asteroid_group,dokilla=True,dokillb=True):
                 scores += 100
 
 menu.menu_screen(Button,run_game)
 
+#------------------SPECIAL THANKS to Pier,Excel,georgius,William,Nicander,Nicolas,Andy,Guntur---------------------------
+"""Acknowledgement:
+LaserBlast.wav(shooting sound) http://soundbible.com/472-Laser-Blasts.html
+"""
