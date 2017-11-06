@@ -1,16 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="4d1a5313-9c01-4983-baa1-4a5f96ada891" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/asteroid_class.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/back_ground.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bullet.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/font.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/jet.py" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app.py" afterPath="$PROJECT_DIR$/app.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/menu.py" afterPath="$PROJECT_DIR$/menu.py" />
-    </list>
+    <list default="true" id="4d1a5313-9c01-4983-baa1-4a5f96ada891" name="Default" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
