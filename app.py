@@ -123,7 +123,7 @@ def run_game():
 
 menu.menu_screen(Button,run_game)
 
-#------------------SPECIAL THANKS to Pier,Excel,georgius,William,Nicander,Nicolas,Andy,Guntur---------------------------
+#---------------SPECIAL THANKS to Pier,Excel,georgius,William,Nicander,Nicolas,Andy,Guntur,Adrian-----------------------
 """Acknowledgement:
 LaserBlast.wav(shooting sound) http://soundbible.com/472-Laser-Blasts.html
 """
